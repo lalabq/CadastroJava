@@ -43,7 +43,7 @@
                                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                                   <Component id="jLabelQtd" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelValor" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jComboBoxCategorias" min="-2" pref="185" max="-2" attributes="0"/>
                           </Group>
@@ -67,7 +67,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelValor" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelQtd" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelDesc" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -103,7 +103,7 @@
         <Property name="text" type="java.lang.String" value="Quantidade"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="jLabelValor">
       <Properties>
         <Property name="text" type="java.lang.String" value="Valor"/>
       </Properties>

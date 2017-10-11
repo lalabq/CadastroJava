@@ -5,6 +5,9 @@
  */
 package view;
 
+import model.bean.Categoria;
+import model.dao.CategoriaDAO;
+
 /**
  *
  * @author Administrador
@@ -13,11 +16,20 @@ public class viewCadastro extends javax.swing.JFrame {
 
     /**
      * Creates new form viewCadastro
+     * Método construtor (método com o mesmo nome que a classe). É o primeiro a ser chamado
      */
     public viewCadastro() {
         initComponents();
+        preencherComboBoxCategorias();
     }
 
+    private void preencherComboBoxCategorias(){
+        CategoriaDAO catDAO = new CategoriaDAO();
+        for(Categoria cat : catDAO.findAll()){
+            jComboBoxCategorias.addItem(cat);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,7 +41,7 @@ public class viewCadastro extends javax.swing.JFrame {
 
         jLabelDesc = new javax.swing.JLabel();
         jLabelQtd = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelValor = new javax.swing.JLabel();
         jTextFieldDesc = new javax.swing.JTextField();
         jTextFieldQtd = new javax.swing.JTextField();
         jTextFieldValor = new javax.swing.JTextField();
@@ -47,7 +59,7 @@ public class viewCadastro extends javax.swing.JFrame {
 
         jLabelQtd.setText("Quantidade");
 
-        jLabel3.setText("Valor");
+        jLabelValor.setText("Valor");
 
         jButtonCadastrar.setText("Cadastrar");
 
@@ -106,7 +118,7 @@ public class viewCadastro extends javax.swing.JFrame {
                                     .addGap(29, 29, 29)
                                     .addComponent(jLabelQtd)
                                     .addGap(51, 51, 51)
-                                    .addComponent(jLabel3))
+                                    .addComponent(jLabelValor))
                                 .addComponent(jComboBoxCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(jTextFieldDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -122,7 +134,7 @@ public class viewCadastro extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(jLabelValor)
                     .addComponent(jLabelQtd)
                     .addComponent(jLabelDesc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -185,10 +197,10 @@ public class viewCadastro extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCadastrar;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JComboBox<Object> jComboBoxCategorias;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelCategorias;
     private javax.swing.JLabel jLabelDesc;
     private javax.swing.JLabel jLabelQtd;
+    private javax.swing.JLabel jLabelValor;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableProdutos;
     private javax.swing.JTextField jTextFieldDesc;

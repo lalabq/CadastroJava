@@ -36,5 +36,10 @@ public class Categoria {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    @Override
+    public String toString() {
+        return getDescricao(); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
