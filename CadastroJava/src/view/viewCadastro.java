@@ -5,8 +5,11 @@
  */
 package view;
 
+import javax.swing.table.DefaultTableModel;
 import model.bean.Categoria;
+import model.bean.Produto;
 import model.dao.CategoriaDAO;
+import model.dao.ProdutoDAO;
 
 /**
  *
@@ -14,16 +17,39 @@ import model.dao.CategoriaDAO;
  */
 public class viewCadastro extends javax.swing.JFrame {
 
+    private DefaultTableModel dtmProdutos;
     /**
      * Creates new form viewCadastro
      * Método construtor (método com o mesmo nome que a classe). É o primeiro a ser chamado
      */
     public viewCadastro() {
         initComponents();
-        preencherComboBoxCategorias();
+        preencherComboboxCategorias();
+        dtmProdutos = (DefaultTableModel) jTableProdutos.getModel();
+        preencherTabelaProdutos();
     }
 
-    private void preencherComboBoxCategorias(){
+    private void preencherTabelaProdutos(){
+        ProdutoDAO pDao = new ProdutoDAO();
+        int idProduto = 0;
+        String descProduto = "";
+        int quantidade = 0;
+        double valor = 0.0d;
+        int idCategoria = 0;
+        dtmProdutos.setRowCount(0);//Reseta a tabela (limpa)
+        for(Produto p : pDao.findAll()){
+            idProduto = p.getIdProduto();
+            descProduto = p.getDescricao();
+            quantidade = p.getQtd();
+            valor = p.getValor();
+            //Composição (chama objeto de outro objeto
+            //Nesse caso, categoria tem id e descrição, então pega só id dela
+            idCategoria = p.getCategoria().getIdCategoria();
+            Object[] dados = {idProduto, descProduto, quantidade, valor, idCategoria};
+            dtmProdutos.addRow(dados);
+        }
+    }
+    private void preencherComboboxCategorias(){
         CategoriaDAO catDAO = new CategoriaDAO();
         for(Categoria cat : catDAO.findAll()){
             jComboBoxCategorias.addItem(cat);
@@ -138,10 +164,11 @@ public class viewCadastro extends javax.swing.JFrame {
                     .addComponent(jLabelQtd)
                     .addComponent(jLabelDesc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldQtd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCadastrar)
